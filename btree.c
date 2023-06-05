@@ -1,3 +1,4 @@
+#include "pila.h"
 #include "btree.h"
 #include <assert.h>
 #include <stdlib.h>
@@ -45,9 +46,18 @@ BTree btree_unir(int dato, BTree left, BTree right) {
 /**
  * Recorrido del arbol, utilizando la funcion pasada.
  */
-void btree_recorrer(BTree arbol, BTreeOrdenDeRecorrido orden,
-                    FuncionVisitante visit) {
-  /** COMPLETAR */
-  assert(0);
-  return;
+void btree_recorrer(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitante visit) {
+  if (orden==BTREE_RECORRIDO_PRE){
+    visit(arbol->dato);
+    btree_recorrer(arbol->left, BTREE_RECORRIDO_PRE, visit);
+    btree_recorrer(arbol->right, BTREE_RECORRIDO_PRE, visit);
+  } else if(orden==BTREE_RECORRIDO_IN){
+    btree_recorrer(arbol->left, BTREE_RECORRIDO_IN, visit);
+    visit(arbol->dato);
+    btree_recorrer(arbol->right, BTREE_RECORRIDO_IN, visit);
+  } else if(orden==BTREE_RECORRIDO_PRE){
+    btree_recorrer(arbol->left, BTREE_RECORRIDO_PRE, visit);
+    btree_recorrer(arbol->right, BTREE_RECORRIDO_PRE, visit);
+    visit(arbol->dato);
+  }
 }
