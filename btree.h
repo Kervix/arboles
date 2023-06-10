@@ -35,7 +35,10 @@ BTree btree_unir(int dato, BTree left, BTree right);
 /**
  * Recorrido del arbol, utilizando la funcion pasada.
  */
-void btree_recorrer(BTree arbol, BTreeOrdenDeRecorrido orden,
-                    FuncionVisitante visit);
+void btree_recorrer(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitante visit);
 
-#endif /* __BTREE_H__ */
+int btree_nnodos(BTree arbol);
+
+int btree_buscar(BTree arbol, int dato);
+
+#endif /* __BTREE_H__ *

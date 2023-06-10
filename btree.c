@@ -47,17 +47,45 @@ BTree btree_unir(int dato, BTree left, BTree right) {
  * Recorrido del arbol, utilizando la funcion pasada.
  */
 void btree_recorrer(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitante visit) {
-  if (orden==BTREE_RECORRIDO_PRE){
-    visit(arbol->dato);
-    btree_recorrer(arbol->left, BTREE_RECORRIDO_PRE, visit);
-    btree_recorrer(arbol->right, BTREE_RECORRIDO_PRE, visit);
-  } else if(orden==BTREE_RECORRIDO_IN){
-    btree_recorrer(arbol->left, BTREE_RECORRIDO_IN, visit);
-    visit(arbol->dato);
-    btree_recorrer(arbol->right, BTREE_RECORRIDO_IN, visit);
-  } else if(orden==BTREE_RECORRIDO_PRE){
-    btree_recorrer(arbol->left, BTREE_RECORRIDO_PRE, visit);
-    btree_recorrer(arbol->right, BTREE_RECORRIDO_PRE, visit);
-    visit(arbol->dato);
+  if (arbol == NULL) {
+    return;
+  }
+
+  switch (orden) {
+    case BTREE_RECORRIDO_PRE:
+      visit(arbol->dato);
+      btree_recorrer(arbol->left, orden, visit);
+      btree_recorrer(arbol->right, orden, visit);
+      break;
+    case BTREE_RECORRIDO_IN:
+      btree_recorrer(arbol->left, orden, visit);
+      visit(arbol->dato);
+      btree_recorrer(arbol->right, orden, visit);
+      break;
+    case BTREE_RECORRIDO_POST:
+      btree_recorrer(arbol->left, orden, visit);
+      btree_recorrer(arbol->right, orden, visit);
+      visit(arbol->dato);
+      break;
+    default:
+      break;
+  }
+}
+
+int btree_nnodos(BTree arbol){
+  int suma=0;
+  if(arbol!=NULL){
+    suma++;
+    suma+=btree_nnodos(arbol->left);
+    suma+=btree_nnodos(arbol->right);
+  }
+  return suma;
+}
+
+int btree_buscar(BTree arbol, int dato){
+  int encontrado=0;
+  if(arbol!=NULL){
+    encontrado|=btree_buscar(arbol->left);
+    encontrado|=btree_buscar(arbol->right);
   }
 }
