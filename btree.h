@@ -41,4 +41,4 @@ int btree_nnodos(BTree arbol);
 
 int btree_buscar(BTree arbol, int dato);
 
-#endif /* __BTREE_H__ *
+#endif /* __BTREE_H__ */

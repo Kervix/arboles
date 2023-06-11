@@ -1,4 +1,3 @@
-#include "pila.h"
 #include "btree.h"
 #include <assert.h>
 #include <stdlib.h>
@@ -84,8 +83,10 @@ int btree_nnodos(BTree arbol){
 
 int btree_buscar(BTree arbol, int dato){
   int encontrado=0;
-  if(arbol!=NULL){
-    encontrado|=btree_buscar(arbol->left);
-    encontrado|=btree_buscar(arbol->right);
+  if(arbol->dato==dato) encontrado=1;
+  if(arbol!=NULL && !encontrado){
+    encontrado|=btree_buscar(arbol->left, dato);
+    encontrado|=btree_buscar(arbol->right, dato);
   }
+  return encontrado;
 }
