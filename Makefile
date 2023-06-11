@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -g
 
-TARGET = programa
+TARGET = main
 SRCS = main.c btree.c
 OBJS = $(SRCS:.c=.o)
 
