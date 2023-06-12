@@ -116,13 +116,14 @@ int btree_profundidad(BTree arbol, int dato){
 }
 
 int btree_sumar(BTree arbol){
-  int suma=0;
   if(!btree_empty(arbol)){
+    int suma=0;
     suma+=arbol->dato;
     suma+=btree_sumar(arbol->left);
     suma+=btree_sumar(arbol->right);
+    return suma;
   }
-  return suma;
+  return 0;
 }
 
 // void btree_recorrer_extra(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitanteExtra visit, void *extra){
