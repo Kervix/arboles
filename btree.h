@@ -2,6 +2,7 @@
 #define __BTREE_H__
 
 typedef void (*FuncionVisitante)(int dato);
+typedef void (*FuncionVisitanteExtra) (int dato, void *extra);
 
 typedef enum {
   BTREE_RECORRIDO_IN,
@@ -41,4 +42,17 @@ int btree_nnodos(BTree arbol);
 
 int btree_buscar(BTree arbol, int dato);
 
+BTree btree_copiar(BTree arbol);
+
+int btree_altura(BTree arbol);
+
+int btree_nnodos_profundidad(BTree arbol, int profundidad);
+
+int btree_profundidad(BTree arbol, int dato);
+
+int btree_sumar(BTree arbol);
+
+void btree_recorrer_extra(BTree arbol, BTreeOrdenDeRecorrido orden, FuncionVisitanteExtra visit, void *extra);
+
+void btree_recorrer_bfs(BTree arbol, FuncionVisitante visit);
 #endif /* __BTREE_H__ */

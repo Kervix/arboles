@@ -4,6 +4,7 @@ CFLAGS = -Wall -Wextra -g
 TARGET = main
 SRCS = main.c btree.c
 OBJS = $(SRCS:.c=.o)
+VALGRIND = valgrind
 
 .PHONY: all clean
 
@@ -14,6 +15,9 @@ $(TARGET): $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+run: $(TARGET)
+	$(VALGRIND) ./$(TARGET)
 
 clean:
 	rm -f $(OBJS) $(TARGET)
